@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Monster",
+  "description": "A monster that players encounter during boss fights (merged PRs)",
+  "type": "object",
+  "required": ["name", "description", "difficulty", "hp", "attack", "xp_reward"],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The monster's display name",
+      "minLength": 1,
+      "maxLength": 50
+    },
+    "description": {
+      "type": "string",
+      "description": "Flavor text — give your monster personality",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["easy", "medium", "hard", "boss"],
+      "description": "Difficulty tier — determines when this monster appears"
+    },
+    "hp": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000,
+      "description": "Hit points the player must deplete to win"
+    },
+    "attack": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100,
+      "description": "Damage dealt to the player per round"
+    },
+    "xp_reward": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 500,
+      "description": "XP awarded for defeating this monster"
+    },
+    "drop": {
+      "type": "string",
+      "description": "Name of the item this monster can drop (must match an item file)",
+      "minLength": 1
+    },
+    "drop_chance": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Probability of dropping the item (0.0 to 1.0)"
+    }
+  }
+}

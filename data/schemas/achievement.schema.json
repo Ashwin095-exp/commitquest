@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Achievement",
+  "description": "A one-time milestone triggered by player activity",
+  "type": "object",
+  "required": ["name", "description", "trigger", "xp_reward"],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The achievement's display name",
+      "minLength": 1,
+      "maxLength": 50
+    },
+    "description": {
+      "type": "string",
+      "description": "What this achievement celebrates",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "trigger": {
+      "type": "object",
+      "description": "Condition that unlocks this achievement",
+      "required": ["event", "count"],
+      "properties": {
+        "event": {
+          "type": "string",
+          "enum": ["commit", "pr_merged", "pr_reviewed", "issue_closed", "streak_days", "level_reached"],
+          "description": "The event type to track"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "How many times the event must occur"
+        }
+      },
+      "additionalProperties": false
+    },
+    "xp_reward": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000,
+      "description": "XP awarded when the achievement is unlocked"
+    },
+    "item_reward": {
+      "type": "string",
+      "description": "Name of an item awarded (must match an item file)",
+      "minLength": 1
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Backend Mage",
+  "description": "Masters of the server realm. They weave spells in Python, Java, and Go, conjuring APIs and taming databases with arcane queries.",
+  "primary_stat": "int",
+  "stat_bonus": {
+    "str": 2,
+    "int": 5,
+    "dex": 1,
+    "con": 2
+  },
+  "file_patterns": [".py", ".java", ".go", ".rb", ".rs", ".sql"],
+  "passive": "Arcane Efficiency — earns bonus XP from commits that touch database files"
+}

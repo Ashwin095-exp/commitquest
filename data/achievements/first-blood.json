@@ -1,0 +1,9 @@
+{
+  "name": "First Blood",
+  "description": "You pushed your very first commit. Every legend starts somewhere.",
+  "trigger": {
+    "event": "commit",
+    "count": 1
+  },
+  "xp_reward": 50
+}

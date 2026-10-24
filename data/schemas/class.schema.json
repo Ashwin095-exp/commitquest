@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Character Class",
+  "description": "A character archetype based on coding patterns",
+  "type": "object",
+  "required": ["name", "description", "primary_stat", "stat_bonus", "file_patterns"],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The class display name",
+      "minLength": 1,
+      "maxLength": 50
+    },
+    "description": {
+      "type": "string",
+      "description": "What kind of developer this class represents",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "primary_stat": {
+      "type": "string",
+      "enum": ["str", "int", "dex", "con"],
+      "description": "The stat this class is strongest in"
+    },
+    "stat_bonus": {
+      "type": "object",
+      "description": "Starting stat bonuses for this class",
+      "properties": {
+        "str": { "type": "integer", "minimum": 0, "maximum": 10 },
+        "int": { "type": "integer", "minimum": 0, "maximum": 10 },
+        "dex": { "type": "integer", "minimum": 0, "maximum": 10 },
+        "con": { "type": "integer", "minimum": 0, "maximum": 10 }
+      },
+      "additionalProperties": false
+    },
+    "file_patterns": {
+      "type": "array",
+      "description": "File extensions or paths that indicate this class",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "passive": {
+      "type": "string",
+      "description": "A class-specific passive ability (flavor text for now)",
+      "maxLength": 200
+    }
+  }
+}

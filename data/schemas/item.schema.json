@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Item",
+  "description": "An item that gives passive bonuses to a character",
+  "type": "object",
+  "required": ["name", "description", "rarity", "stat_bonus"],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The item's display name",
+      "minLength": 1,
+      "maxLength": 50
+    },
+    "description": {
+      "type": "string",
+      "description": "Flavor text — what is this item and why is it cool?",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "rarity": {
+      "type": "string",
+      "enum": ["common", "uncommon", "rare", "epic", "legendary"],
+      "description": "How rare this item is"
+    },
+    "stat_bonus": {
+      "type": "object",
+      "description": "Stat bonuses this item provides",
+      "properties": {
+        "str": { "type": "integer", "minimum": 0, "maximum": 20 },
+        "int": { "type": "integer", "minimum": 0, "maximum": 20 },
+        "dex": { "type": "integer", "minimum": 0, "maximum": 20 },
+        "con": { "type": "integer", "minimum": 0, "maximum": 20 }
+      },
+      "additionalProperties": false
+    },
+    "effect": {
+      "type": "string",
+      "description": "Special effect description (for display, not gameplay logic yet)",
+      "maxLength": 200
+    }
+  }
+}

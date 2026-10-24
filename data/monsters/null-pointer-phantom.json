@@ -1,0 +1,10 @@
+{
+  "name": "Null Pointer Phantom",
+  "description": "A ghostly figure that haunts codebases where variables are used before they're defined. It whispers 'undefined' as it attacks.",
+  "difficulty": "easy",
+  "hp": 30,
+  "attack": 5,
+  "xp_reward": 25,
+  "drop": "Debugger's Lens",
+  "drop_chance": 0.3
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Debugger's Lens",
+  "description": "A crystalline monocle that lets you see through obfuscated stack traces. Dropped by the Null Pointer Phantom.",
+  "rarity": "uncommon",
+  "stat_bonus": {
+    "int": 5
+  },
+  "effect": "Reveals hidden error messages in combat"
+}

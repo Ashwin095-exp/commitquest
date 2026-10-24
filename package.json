@@ -1,0 +1,20 @@
+{
+  "name": "commitquest",
+  "version": "0.1.0",
+  "description": "An RPG powered by your real GitHub activity",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "commitquest": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node scripts/validate.js"
+  },
+  "keywords": ["github", "rpg", "gamification", "cli"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/upstream-oss/commitquest.git"
+  }
+}
