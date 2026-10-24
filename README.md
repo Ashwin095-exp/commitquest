@@ -1,81 +1,218 @@
 # CommitQuest ⚔️
 
-**Your GitHub activity powers an RPG character.**
+```
+╔══════════════════════════════════════════════════════════╗
+║                                                          ║
+║   You don't play CommitQuest.                            ║
+║   Your code plays it for you.                            ║
+║                                                          ║
+╚══════════════════════════════════════════════════════════╝
+```
 
-Commits give you XP. Merged PRs are boss fights. A commit streak is a buff.
-A failing CI run? That's a curse.
+Every commit is XP. Every merged PR is a boss fight. A 7-day streak?
+That's a buff. A failing CI run? You just got cursed.
 
-CommitQuest turns your real coding work into a game — level up, collect items,
-fight monsters, and climb the leaderboard just by shipping code.
+CommitQuest reads your real GitHub activity and turns it into an RPG.
+Level up, fight monsters, collect loot, pick a class, and climb the
+leaderboard. All by doing what you already do: shipping code.
 
-## How It Works
+## The Rules
 
-| GitHub Event        | Game Effect                        |
-|---------------------|------------------------------------|
-| Commit pushed       | +XP (scales with streak)           |
-| PR merged           | Boss fight — defeat a monster      |
-| PR reviewed         | +XP bonus, "Guardian" buff         |
-| Issue opened        | Quest accepted                     |
-| Issue closed        | Quest completed, +XP               |
-| CI passing          | Shield restored                    |
-| CI failing          | Cursed — stats debuffed            |
-| Commit streak (7d+) | Streak multiplier on all XP        |
+```
+ ┌─────────────────────┬────────────────────────────────────┐
+ │ GitHub Event         │ What Happens To You                │
+ ├─────────────────────┼────────────────────────────────────┤
+ │ Commit pushed        │ +XP (scales with your streak)      │
+ │ PR merged            │ Boss fight. Kill or be killed.      │
+ │ PR reviewed          │ +XP bonus, "Guardian" buff          │
+ │ Issue opened         │ New quest accepted                  │
+ │ Issue closed         │ Quest complete, +XP                 │
+ │ CI passing           │ Shield restored                     │
+ │ CI failing           │ CURSED. Stats debuffed.             │
+ │ 7+ day streak        │ Streak multiplier on ALL XP         │
+ └─────────────────────┴────────────────────────────────────┘
+```
 
-## Game Entities
+## Your Character
 
-The game world is built from simple data files anyone can contribute:
+Your class is auto-assigned based on what files you touch:
 
-- **Monsters** — enemies you fight when PRs merge (`data/monsters/`)
-- **Items** — gear and power-ups earned through achievements (`data/items/`)
-- **Achievements** — milestones triggered by your activity (`data/achievements/`)
-- **Classes** — character archetypes based on what you code (`data/classes/`)
+```
+  🧙 Backend Mage        .py .java .go .rb .rs .sql
+  ⚔️  Frontend Knight      .html .css .jsx .tsx .vue .svelte
+  🛡️  DevOps Paladin       .yml .tf .dockerfile .sh .toml
+  🏹 Full Stack Ranger     A bit of everything
+```
 
-Each entity is a JSON file that follows a schema. See the `data/schemas/` folder
-for the structure, or look at the examples already in each folder.
+Four stats. All derived from your activity. No manual builds.
 
-## Project Status
+```
+  STR  ███████░░░  Commit volume
+  INT  █████████░  PR reviews given
+  DEX  ████████░░  Streak length
+  CON  ██████░░░░  Repo diversity
+```
 
-> 🚧 **This project is in its earliest stage.**
-> We have the vision, the data schemas, and a set of open issues.
-> The actual game engine, CLI, and UI are yet to be built — by you.
+## The World
 
-Check the [issues](https://github.com/upstream-oss/commitquest/issues) to find
-something to work on.
+The game world lives in `data/`. Every monster, item, achievement, and
+class is a JSON file that anyone can add.
 
-## Quick Start
+```
+data/
+├── monsters/       Enemies you fight when PRs merge
+├── items/          Gear earned through combat and achievements
+├── achievements/   One-time milestones from your activity
+├── classes/        Character archetypes
+└── schemas/        The rules each file must follow
+```
+
+Want to add a monster? Create a `.json` file, follow the schema, open a PR.
+Your first contribution can take 15 minutes.
+
+## Getting Started
+
+> This is not a `git clone && npm start` kind of setup.
+> You're joining an RPG. Treat it like one.
+
+### Step 1: Fork the quest
+
+Fork this repo. This is your copy of the world. You'll submit changes
+back via pull requests (that's how boss fights work, remember?).
+
+### Step 2: Set up your environment
 
 ```bash
-# Clone the repo
-git clone https://github.com/upstream-oss/commitquest.git
+git clone https://github.com/<your-username>/commitquest.git
 cd commitquest
+```
 
-# Install dependencies
+You need **Node.js 18+**. Check with:
+
+```bash
+node --version
+```
+
+Don't have it? Install it from [nodejs.org](https://nodejs.org) or use
+[nvm](https://github.com/nvm-sh/nvm):
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+nvm install 18
+nvm use 18
+```
+
+### Step 3: Install and validate
+
+```bash
 npm install
-
-# Run schema validation
 npm test
+```
+
+You should see every data file pass validation:
+
+```
+  OK  data/monsters/null-pointer-phantom.json
+  OK  data/items/debuggers-lens.json
+  OK  data/achievements/first-blood.json
+  OK  data/classes/backend-mage.json
+
+All data files valid. ✓
+```
+
+If something fails, you broke a schema. Fix it before going further.
+
+### Step 4: Set up your upstream remote
+
+You need to sync with the original repo, not just your fork:
+
+```bash
+git remote add upstream https://github.com/upstream-oss/commitquest.git
+git fetch upstream
+```
+
+Verify it:
+
+```bash
+git remote -v
+```
+
+You should see both `origin` (your fork) and `upstream` (this repo).
+
+### Step 5: Create a branch and start your quest
+
+```bash
+git checkout -b add-my-first-monster
+```
+
+Now go pick an [issue](https://github.com/upstream-oss/commitquest/issues),
+build something, and open a PR.
+
+## What's Been Built (and What Hasn't)
+
+```
+  [■■░░░░░░░░]  20% complete
+```
+
+Done:
+- Game design and RPG mechanics (`docs/GAME_DESIGN.md`)
+- Data schemas for all entity types
+- Validation script and CI pipeline
+- Example entities (one per category)
+
+Not done (yet):
+- CLI that fetches your GitHub events
+- XP calculation engine
+- Monster encounter / combat system
+- ASCII character sheet renderer
+- Web UI with pixel art
+- Guilds, PvP, leaderboard
+- VS Code extension
+
+The engine, the UI, the entire game? That's what the
+[issues](https://github.com/upstream-oss/commitquest/issues) are for.
+Some are 15-minute data tasks. Some are full features. Pick your level.
+
+## Sample Character Sheet
+
+This is what `commitquest` will print when it's built:
+
+```
+╔══════════════════════════════════════╗
+║  COMMITQUEST                         ║
+╠══════════════════════════════════════╣
+║                                      ║
+║  Name:   parthdagia05                ║
+║  Class:  Full Stack Ranger 🏹        ║
+║  Level:  12                          ║
+║  XP:     1,847 / 4,157              ║
+║  ▓▓▓▓▓▓▓▓▓░░░░░░░░░  44%           ║
+║                                      ║
+║  STR: 24   INT: 18                   ║
+║  DEX: 31   CON: 15                   ║
+║                                      ║
+║  🔥 Streak: 9 days (1.5x)           ║
+║  ✨ Buff: Focused (+50% XP)         ║
+║                                      ║
+║  Equipped:                           ║
+║    ☕ Coffee of Infinite Focus        ║
+║    🔍 Debugger's Lens                ║
+║                                      ║
+║  Last Battle:                        ║
+║    Defeated Null Pointer Phantom!     ║
+║    +50 XP, looted Debugger's Lens    ║
+║                                      ║
+╚══════════════════════════════════════╝
 ```
 
 ## Contributing
 
-We welcome contributions of all sizes — from adding a single monster to
-building core game systems. Read our [Contributing Guide](CONTRIBUTING.md)
-to get started.
+Read the [Contributing Guide](CONTRIBUTING.md). The short version:
 
-**Your first PR can be as simple as adding a new monster or item.** No code
-needed — just a JSON file.
-
-## Roadmap
-
-- [x] Game design and data schemas
-- [ ] CLI that fetches GitHub events and prints a character sheet
-- [ ] XP calculation engine
-- [ ] Monster encounter system
-- [ ] ASCII art character sheet renderer
-- [ ] Web UI with pixel art
-- [ ] Guilds (team-based play)
-- [ ] Leaderboard
-- [ ] VS Code extension
+1. Pick an [issue](https://github.com/upstream-oss/commitquest/issues)
+2. Fork, branch, build, validate (`npm test`)
+3. Open a PR
+4. That's it. You just fought a boss.
 
 ## License
 
